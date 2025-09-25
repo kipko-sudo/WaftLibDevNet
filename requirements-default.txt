@@ -1,1 +1,1 @@
-waftlib/templates/16.0/requirements-default.txt
+waftlib/templates/15.0/requirements-default.txt

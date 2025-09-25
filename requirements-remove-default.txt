@@ -1,1 +1,0 @@
-waftlib/templates/16.0/requirements-remove-default.txt
