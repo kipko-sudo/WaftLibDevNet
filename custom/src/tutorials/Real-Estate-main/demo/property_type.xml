@@ -1,0 +1,7 @@
+<odoo>
+    <data noupdate="1">
+        <record id="property_typeHouse" model="estate.property.type">
+            <field name="name">House</field>
+        </record>
+    </data>
+</odoo>

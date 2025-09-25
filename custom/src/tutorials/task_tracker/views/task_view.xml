@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="task_tracker_tree_view" model="ir.ui.view">
+        <field name="name">task.tracker.tree</field>
+        <field name="model">task.tracker</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="task_tracker_form_view" model="ir.ui.view">
+        <field name="name">task.tracker.form</field>
+        <field name="model">task.tracker</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="description"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="task_tracker_action" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="res_model">task.tracker</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_task_tracker" name="Task Tracker"
+              parent="base.menu_config"
+              action="task_tracker_action"/>
+</odoo>

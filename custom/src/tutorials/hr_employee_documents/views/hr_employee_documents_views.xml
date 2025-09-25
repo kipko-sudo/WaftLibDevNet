@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit the main Employee Form and add a Documents tab on the notebook -->
+    <record id="view_employee_form_inherit_documents" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.documents</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Documents" name="employee_documents_tab">
+                    <field name="document_ids" widget="section_and_note_one2many" mode="tree">
+                        <tree string="Documents" editable="top">
+                            <control>
+                                <create string="Add a document"/>
+                            </control>
+                            <field name="doc_name"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                            <field name="write_date" string="Last Updated on" readonly="1"/>
+                        </tree>
+                    </field>
+
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
