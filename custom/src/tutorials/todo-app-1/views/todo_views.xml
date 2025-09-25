@@ -31,6 +31,7 @@
                         <field name="is_done"/>
                         <field name="priority"/>
                         <field name="due_date"/>
+                        <field name="deadline"/>
                         <field name="is_overdue" readonly="1"/>
                         <field name="user_id"/>
                     </group>
@@ -82,6 +83,54 @@
         </field>
     </record>
 
+    <!-- Kanban Visual -->
+    <record id="view_todo_task_kanban" model="ir.ui.view">
+        <field name="name">todo.task.kanban</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="priority" class="o_kanban_example">
+                <field name="name"/>
+                <field name="priority"/>
+                <field name="deadline"/>
+                <field name="is_done"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                            <div>
+                                <span>Priority: <field name="priority"/></span>
+                            </div>
+                            <div>
+                                <span>Deadline: <field name="deadline"/></span>
+                            </div>
+                            <div>
+                                <span>Status: 
+                                    <t t-if="record.is_done.raw_value">✅ Done</t>
+                                    <t t-else="">🕒 Pending</t>
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_todo_task_graph" model="ir.ui.view">
+        <field name="name">todo.task.graph</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <graph string="Tasks Analysis" type="bar">
+                <field name="is_done" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+
     <!-- Search view -->
     <record id="view_todo_task_search" model="ir.ui.view">
         <field name="name">todo.task.search</field>
@@ -99,14 +148,36 @@
 
     <!-- Action -->
     <record id="action_todo_task" model="ir.actions.act_window">
-        <field name="name">Tasks</field>
+        <field name="name">To-Do Tasks Kanban</field>
         <field name="res_model">todo.task</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="view_todo_task_search"/>
     </record>
 
+    <!-- Kanban Action -->
+    <record id="action_todo_task_kanban" model="ir.actions.act_window">
+        <field name="name">To-Do Tasks (Kanban)</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p>
+                Use this view to organize tasks visually with deadlines and priorities.
+            </p>
+        </field>
+    </record>
+
+    <!-- Graph Action -->
+    <record id="action_todo_task_graph" model="ir.actions.act_window">
+        <field name="name">Tasks Analysis</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">graph,tree,form</field>
+    </record>
+
+
     <!-- Menus -->
     <menuitem id="menu_todo_root" name="To-Do"/>
     <menuitem id="menu_todo_task" name="Tasks" parent="menu_todo_root" action="action_todo_task"/>
+    <menuitem id="menu_todo_task_kanban" name="Tasks (Kanban)" parent="menu_todo_root" action="action_todo_task_kanban"/>
+    <menuitem id="menu_todo_task_graph" name="Tasks (Graph)" parent="menu_todo_root" action="action_todo_task_graph"/>
 
 </odoo>

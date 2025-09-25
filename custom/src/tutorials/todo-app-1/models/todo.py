@@ -14,6 +14,7 @@ class Todo(models.Model):
         ("1", "Normal"),
         ("2", "High"),
     ], string="Priority", default="1")
+    deadline = fields.Date("Deadline") 
     user_id = fields.Many2one("res.users", string="Assigned To")
     stage = fields.Selection([
         ("new", "New"),
