@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_todo_task,todo.task,model_todo_task,,1,1,1,1
+access_todo_subtask_user,access.todo.subtask.user,model_todo_subtask,base.group_user,1,1,1,1
+access_todo_subtask_manager,access.todo.subtask.manager,model_todo_subtask,base.group_system,1,1,1,1
