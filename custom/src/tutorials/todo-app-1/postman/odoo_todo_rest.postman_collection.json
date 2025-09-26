@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Odoo Todo REST API",
+    "_postman_id": "4bda9de0-21d1-45c7-8bcb-abcdef123456",
+    "description": "Postman collection for testing Odoo REST endpoints for todo.task model",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. List Tasks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost:8069/api/todo/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8069",
+          "path": ["api", "todo", "tasks"]
+        }
+      }
+    },
+    {
+      "name": "2. Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Task from REST\",\n  \"priority\": \"1\",\n  \"user_id\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8069/api/todo/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8069",
+          "path": ["api", "todo", "tasks"]
+        }
+      }
+    },
+    {
+      "name": "3. Update Task",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"is_done\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8069/api/todo/tasks/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8069",
+          "path": ["api", "todo", "tasks", "1"]
+        }
+      }
+    },
+    {
+      "name": "4. Delete Task",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost:8069/api/todo/tasks/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8069",
+          "path": ["api", "todo", "tasks", "1"]
+        }
+      }
+    }
+  ]
+}

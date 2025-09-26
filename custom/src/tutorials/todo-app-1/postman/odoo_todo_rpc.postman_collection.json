@@ -1,0 +1,80 @@
+{
+  "info": {
+    "name": "Odoo Todo RPC API",
+    "_postman_id": "e1a3c0de-0d0a-43fb-92b1-123456789abc",
+    "description": "Postman collection for testing Odoo JSON-RPC APIs on todo.task",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authenticate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"common\",\n    \"method\": \"authenticate\",\n    \"args\": [\n      \"your_db_name\",\n      \"admin\",\n      \"admin_password\",\n      {}\n    ]\n  },\n  \"id\": 1\n}"
+        },
+        "url": { "raw": "http://localhost:8069/jsonrpc", "protocol": "http", "host": ["localhost"], "port": "8069", "path": ["jsonrpc"] }
+      }
+    },
+    {
+      "name": "2. Read Tasks",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"your_db_name\",\n      2,\n      \"admin_password\",\n      \"todo.task\",\n      \"search_read\",\n      [[[\"is_done\", \"=\", false]]],\n      {\"fields\": [\"id\", \"name\", \"priority\", \"user_id\"]}\n    ]\n  },\n  \"id\": 2\n}"
+        },
+        "url": { "raw": "http://localhost:8069/jsonrpc", "protocol": "http", "host": ["localhost"], "port": "8069", "path": ["jsonrpc"] }
+      }
+    },
+    {
+      "name": "3. Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"your_db_name\",\n      2,\n      \"admin_password\",\n      \"todo.task\",\n      \"create\",\n      [{\n        \"name\": \"Test task from Postman\",\n        \"priority\": \"1\"\n      }]\n    ]\n  },\n  \"id\": 3\n}"
+        },
+        "url": { "raw": "http://localhost:8069/jsonrpc", "protocol": "http", "host": ["localhost"], "port": "8069", "path": ["jsonrpc"] }
+      }
+    },
+    {
+      "name": "4. Update Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"your_db_name\",\n      2,\n      \"admin_password\",\n      \"todo.task\",\n      \"write\",\n      [[1], {\"is_done\": true}]\n    ]\n  },\n  \"id\": 4\n}"
+        },
+        "url": { "raw": "http://localhost:8069/jsonrpc", "protocol": "http", "host": ["localhost"], "port": "8069", "path": ["jsonrpc"] }
+      }
+    },
+    {
+      "name": "5. Delete Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"your_db_name\",\n      2,\n      \"admin_password\",\n      \"todo.task\",\n      \"unlink\",\n      [[1]]\n    ]\n  },\n  \"id\": 5\n}"
+        },
+        "url": { "raw": "http://localhost:8069/jsonrpc", "protocol": "http", "host": ["localhost"], "port": "8069", "path": ["jsonrpc"] }
+      }
+    }
+  ]
+}
