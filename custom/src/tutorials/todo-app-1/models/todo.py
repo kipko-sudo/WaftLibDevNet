@@ -21,7 +21,11 @@ class Todo(models.Model):
         ("in_progress", "In Progress"),
         ("done", "Done"),
     ], string="Stage", default="new")
-
+    stage_id = fields.Many2one(
+        "todo.stage", 
+        string="Stage", 
+        ondelete="set null"
+    )
     is_overdue = fields.Boolean(
         "Overdue",
         compute="_compute_is_overdue",
@@ -64,3 +68,11 @@ class TodoSubtask(models.Model):
     name = fields.Char("Subtask", required=True)
     is_done = fields.Boolean("Done?")
     task_id = fields.Many2one("todo.task", string="Parent Task", ondelete="cascade")
+
+class TodoStage(models.Model):
+    _name = "todo.stage"
+    _description = "To-Do Stage"
+
+    name = fields.Char("Stage Name", required=True)
+    sequence = fields.Integer("Sequence", default=1)
+    fold = fields.Boolean("Fold in Kanban", default=False)

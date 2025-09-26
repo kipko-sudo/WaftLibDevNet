@@ -28,6 +28,7 @@
                     <group>
                         <field name="name"/>
                         <field name="stage"/>
+                        <field name="stage_id"/>
                         <field name="is_done"/>
                         <field name="priority"/>
                         <field name="due_date"/>
@@ -119,7 +120,7 @@
     </record>
 
     <!-- Graph View -->
-    <record id="view_todo_task_graph" model="ir.ui.view">
+    <!-- <record id="view_todo_task_graph" model="ir.ui.view">
         <field name="name">todo.task.graph</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
@@ -128,7 +129,25 @@
                 <field name="id" type="measure"/>
             </graph>
         </field>
+    </record> -->
+
+    <record id="view_todo_task_graph" model="ir.ui.view">
+        <field name="name">todo.task.graph</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <graph string="Tasks Analysis" type="bar">
+                <!-- Count tasks -->
+                <field name="id" type="measure"/>
+
+                <!-- Group by multiple metrics -->
+                <field name="priority" type="row"/>
+                <field name="stage" type="row"/>
+                <field name="is_done" type="row"/>
+                <field name="deadline" interval="month" type="col"/>
+            </graph>
+        </field>
     </record>
+
 
 
     <!-- Search view -->
@@ -177,7 +196,7 @@
     <!-- Menus -->
     <menuitem id="menu_todo_root" name="To-Do"/>
     <menuitem id="menu_todo_task" name="Tasks" parent="menu_todo_root" action="action_todo_task"/>
-    <menuitem id="menu_todo_task_kanban" name="Tasks (Kanban)" parent="menu_todo_root" action="action_todo_task_kanban"/>
-    <menuitem id="menu_todo_task_graph" name="Tasks (Graph)" parent="menu_todo_root" action="action_todo_task_graph"/>
+    <!-- <menuitem id="menu_todo_task_kanban" name="Tasks (Kanban)" parent="menu_todo_root" action="action_todo_task_kanban"/> -->
+    <menuitem id="menu_todo_task_graph" name="Task Visualizer" parent="menu_todo_root" action="action_todo_task_graph"/>
 
 </odoo>

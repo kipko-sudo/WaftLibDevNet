@@ -8,6 +8,7 @@
     "data": [
         'security/ir.model.access.csv',
         "views/todo_views.xml",
+        "data/stage_data.xml"
     ],
     "installable": True,
     "application": True,
